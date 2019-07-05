@@ -33,7 +33,9 @@ class STSstruct:#句子语义相似性测量（Semantic Text Similarity）数据
 # =============================================================================
 # 3.函数方法
 # =============================================================================
-# 1.SICK数据集加载器
+# =============================================================================
+#  1.SICK数据集加载器
+# =============================================================================
 def SICK_loader(filename):
     word_dict={}#词表-word2id-dict
     word_list=[]#词表-id2word-list
@@ -89,7 +91,10 @@ def SICK_loader(filename):
         word_dict[word]=i
     return word_dict,word_list,sent_dict,sent_list,sts_examples
 
-# 2.获取tf_idf，存储在text_num*word_num的稀疏矩阵中
+# =============================================================================
+#  2.获取tf_idf，存储在text_num*word_num的稀疏矩阵中
+# =============================================================================
+#本函数可重用，需要提供 1.词表-word_dict， 2.句子集合-sent_list
 def tf_idf(word_dict,sent_list):
     sent_num=len(sent_list)
     word_idf={}
@@ -120,7 +125,9 @@ def tf_idf(word_dict,sent_list):
     
     return csr
 
-# 3.计算两个向量的余弦相似度
+# =============================================================================
+#  3.计算两个向量的余弦相似度
+# =============================================================================
 def cosine_similarity(vec1,vec2):
     numerator=np.matmul(vec1,vec2.T)
     denominator=np.linalg.norm(vec1-vec2)
